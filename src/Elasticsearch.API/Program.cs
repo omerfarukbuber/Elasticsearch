@@ -1,4 +1,6 @@
 using Elasticsearch.API.Extensions;
+using Elasticsearch.API.Features.Products.Abstract;
+using Elasticsearch.API.Features.Products.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddElasticsearch(builder.Configuration);
+
+builder.Services.AddTransient(sp => new DateTimeProvider());
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductService, ProductService>();
 
 var app = builder.Build();
 
