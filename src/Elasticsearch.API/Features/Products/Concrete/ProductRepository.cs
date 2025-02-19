@@ -1,4 +1,5 @@
-﻿using Elastic.Clients.Elasticsearch;
+﻿using System.Collections.ObjectModel;
+using Elastic.Clients.Elasticsearch;
 using Elasticsearch.API.Extensions;
 using Elasticsearch.API.Features.Products.Abstract;
 
@@ -11,6 +12,8 @@ public class ProductRepository(ElasticsearchClient client, DateTimeProvider date
     {
         var response = await client.SearchAsync<Product>(s => s.Index(IndexName)
             .Query(q => q.MatchAll(_ => {})));
+        if (!response.IsValidResponse)
+            return ReadOnlyCollection<Product>.Empty;
 
         foreach (var hit in response.Hits) hit.Source!.Id = hit.Id!;
 
