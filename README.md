@@ -49,7 +49,8 @@ docker-compose up -d
 Restore dependencies and start the API:  
 
 ```sh  
-dotnet restore  
+dotnet restore
+cd src/Elasticsearch.API  
 dotnet run  
 ```  
 
