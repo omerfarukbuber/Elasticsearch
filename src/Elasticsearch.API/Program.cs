@@ -26,6 +26,7 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/openapi/v1.json", "OpenAPI V1");
     });
+    await app.SeedDataAsync();
 }
 
 app.UseHttpsRedirection();
