@@ -14,5 +14,12 @@ namespace Elasticsearch.API.Controllers
             var result = await repository.TermSearchByCustomerFirstNameAsync(customerFirstName);
             return Ok(result);
         }
+
+        [HttpPost("terms/customer_first_name")]
+        public async Task<IActionResult> GetByCustomerFirstName([FromBody] List<string> customerFirstNames)
+        {
+            var result = await repository.TermsSearchByCustomerFirstNamesAsync(customerFirstNames);
+            return Ok(result);
+        }
     }
 }
